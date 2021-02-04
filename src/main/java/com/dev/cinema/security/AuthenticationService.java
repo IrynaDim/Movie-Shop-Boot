@@ -20,8 +20,7 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public AuthenticationService(UserService userService, JWTTokenService jwtTokenService,
-                                 PasswordEncoder passwordEncoder) {
+    public AuthenticationService(UserService userService, JWTTokenService jwtTokenService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.jwtTokenService = jwtTokenService;
         this.passwordEncoder = passwordEncoder;
@@ -35,9 +34,8 @@ public class AuthenticationService {
 
     public JwtToken signIn(String email, String password) {
         User user = userService.getByEmail(email).
-                orElseThrow(() -> new UsernameNotFoundException("User with email "
-                        + email + " not found"));
-        if (passwordEncoder.matches(password, user.getPassword())) {
+                orElseThrow(() -> new UsernameNotFoundException("User with email " + email + " not found"));;
+        if (passwordEncoder.matches(password, user.getPassword())){
             Map<String, String> userData = new HashMap<>();
             userData.put("id", user.getId().toString());
             return jwtTokenService.expiring(userData);

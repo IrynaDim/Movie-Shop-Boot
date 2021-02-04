@@ -12,14 +12,12 @@ import com.dev.cinema.service.OrderService;
 import com.dev.cinema.service.RoleService;
 import com.dev.cinema.service.ShoppingCartService;
 import com.dev.cinema.service.UserService;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 import javax.annotation.PostConstruct;
-
 import org.springframework.stereotype.Service;
 
 @Service
@@ -47,7 +45,7 @@ public class InjectData {
 
     @PostConstruct
     public void injectDefaultData() {
-        if (userService.getByEmail("admin@gmail.com").isPresent()) {
+        if (userService.getByEmail("admin@gmail.com").isPresent()){
             return;
         }
         Role adminRole = Role.of("ADMIN");

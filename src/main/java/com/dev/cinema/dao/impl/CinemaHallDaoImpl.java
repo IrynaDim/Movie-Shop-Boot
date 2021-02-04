@@ -3,10 +3,8 @@ package com.dev.cinema.dao.impl;
 import com.dev.cinema.dao.CinemaHallDao;
 import com.dev.cinema.exception.DataProcessingException;
 import com.dev.cinema.model.CinemaHall;
-
 import java.util.List;
 import javax.persistence.criteria.CriteriaQuery;
-
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -15,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class CinemaHallDaoImpl implements CinemaHallDao {
+    private static final Logger logger = Logger.getLogger(CinemaHallDaoImpl.class);
     private final SessionFactory sessionFactory;
 
     public CinemaHallDaoImpl(SessionFactory sessionFactory) {
@@ -30,6 +29,7 @@ public class CinemaHallDaoImpl implements CinemaHallDao {
             transaction = session.beginTransaction();
             session.persist(cinemaHall);
             transaction.commit();
+            logger.info("Cinema hall was created: " + cinemaHall);
             return cinemaHall;
         } catch (Exception e) {
             if (transaction != null) {

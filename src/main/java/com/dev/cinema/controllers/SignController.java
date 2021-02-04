@@ -24,7 +24,7 @@ public class SignController {
     @PostMapping()
     public JwtToken in(@RequestParam("email") String email,
                        @RequestParam("password") String password) {
-        JwtToken jwtToken = authenticationService.signIn(email, password);
+        JwtToken jwtToken =  authenticationService.signIn(email, password);
         if (jwtToken == null) {
             throw new HttpBadRequestException("The email/password is invalid");
         }

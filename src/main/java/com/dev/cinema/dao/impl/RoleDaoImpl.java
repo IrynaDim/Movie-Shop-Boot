@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class RoleDaoImpl implements RoleDao {
+    private static final Logger logger = Logger.getLogger(RoleDaoImpl.class);
     private final SessionFactory sessionFactory;
 
     public RoleDaoImpl(SessionFactory sessionFactory) {
@@ -27,6 +28,7 @@ public class RoleDaoImpl implements RoleDao {
             transaction = session.beginTransaction();
             session.save(role);
             transaction.commit();
+            logger.info("Role was created" + role);
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
