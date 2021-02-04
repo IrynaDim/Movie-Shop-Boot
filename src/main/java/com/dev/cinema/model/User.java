@@ -50,6 +50,8 @@ public class User implements UserDetails {
         this.password = password;
     }
 
+    // сопоставляет юзера и секьюрити. получает роли юзера в правильном виде, чтоб секьюрити его прочитала
+    // Arrays.asList(() -> "ROLE_" + roles.toString())
     @Override
     public Collection<GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class ShoppingCartDaoImpl implements ShoppingCartDao {
+    private static final Logger logger = Logger.getLogger(ShoppingCartDaoImpl.class);
     private final SessionFactory sessionFactory;
 
     public ShoppingCartDaoImpl(SessionFactory sessionFactory) {
@@ -28,6 +29,7 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
             transaction = session.beginTransaction();
             session.save(shoppingCart);
             transaction.commit();
+            logger.info("Shopping cart was created" + shoppingCart);
             return shoppingCart;
         } catch (Exception e) {
             if (transaction != null) {
@@ -67,6 +69,7 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
             transaction = session.beginTransaction();
             session.update(shoppingCart);
             transaction.commit();
+            logger.info("Shopping cart was updated" + shoppingCart);
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();

@@ -42,7 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             new AntPathRequestMatcher("/cinema-halls", RequestMethod.GET.name()),
             new AntPathRequestMatcher("/movie-sessions/available", RequestMethod.GET.name())
     );
-
+ 
     private static final RequestMatcher ADMIN_URLS = new OrRequestMatcher(
             new AntPathRequestMatcher("/movies", RequestMethod.POST.name()),
             new AntPathRequestMatcher("/cinema-halls", RequestMethod.POST.name()),
@@ -82,10 +82,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .requestMatchers(ADMIN_URLS).hasRole("ADMIN")
                 .requestMatchers(USER_URLS).hasRole("USER")
                 .and()
-                .csrf().disable()
-                .formLogin().disable()
-                .httpBasic().disable()
-                .logout().disable();
+                .csrf().disable()  // отклбчается защита csrf
+                .formLogin().disable() //формы для логина (странички) не будет
+                .httpBasic().disable() // авторизация с помощью логин и пароля отключена
+                .logout().disable();  // выйти нельзя
     }
 
     @Bean
@@ -101,7 +101,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         return filter;
     }
-
+//действие в случае успешной авторизации, без переадресации NoRedirectStrategy
     @Bean
     SimpleUrlAuthenticationSuccessHandler successHandler() {
         SimpleUrlAuthenticationSuccessHandler successHandler = new SimpleUrlAuthenticationSuccessHandler();

@@ -37,7 +37,7 @@ public class AuthenticationFilter extends AbstractAuthenticationProcessingFilter
                                             HttpServletResponse response,
                                             FilterChain chain,
                                             Authentication authResult)
-            throws IOException, ServletException {
+            throws IOException,ServletException {
         super.successfulAuthentication(request, response, chain, authResult);
         chain.doFilter(request, response);
     }

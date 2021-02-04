@@ -4,14 +4,12 @@ import com.dev.cinema.dao.OrderDao;
 import com.dev.cinema.exception.DataProcessingException;
 import com.dev.cinema.model.Order;
 import com.dev.cinema.model.User;
-
 import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -20,6 +18,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class OrderDaoImpl implements OrderDao {
+    private static final Logger logger = Logger.getLogger(OrderDaoImpl.class);
     private final SessionFactory sessionFactory;
 
     public OrderDaoImpl(SessionFactory sessionFactory) {
@@ -35,6 +34,7 @@ public class OrderDaoImpl implements OrderDao {
             transaction = session.beginTransaction();
             session.save(order);
             transaction.commit();
+            logger.info("Order was created" + order);
             return order;
         } catch (Exception e) {
             if (transaction != null) {

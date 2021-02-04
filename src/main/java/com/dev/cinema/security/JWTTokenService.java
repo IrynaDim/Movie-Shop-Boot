@@ -24,7 +24,7 @@ public class JWTTokenService implements Clock {
     private final String secretKey;
 
     JWTTokenService(@Value("${jwt.issuer}") String issuer,
-                    @Value("${jwt.expiration-sec}") int expirationSec,
+                    @Value("${jwt.expiration-sec}") int expirationSec, //длительность токена сутки
                     @Value("${jwt.clock-skew-sec}") int clockSkewSec,
                     @Value("${jwt.secret-key}") String secretKey) {
         this.issuer = issuer;

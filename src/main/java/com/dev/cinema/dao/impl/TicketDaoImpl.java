@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class TicketDaoImpl implements TicketDao {
+    private static final Logger logger = Logger.getLogger(TicketDaoImpl.class);
     private final SessionFactory sessionFactory;
 
     public TicketDaoImpl(SessionFactory sessionFactory) {
@@ -26,6 +27,7 @@ public class TicketDaoImpl implements TicketDao {
             transaction = session.beginTransaction();
             session.persist(ticket);
             transaction.commit();
+            logger.info("Ticket was created" + ticket);
             return ticket;
         } catch (Exception e) {
             if (transaction != null) {

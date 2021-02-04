@@ -32,7 +32,7 @@ public class OrderController {
     private final UserService userService;
 
     public OrderController(OrderService orderService, OrderMapper orderMapper,
-                           ShoppingCartService cartService, UserService userService) {
+                           ShoppingCartService cartService,  UserService userService) {
         this.orderService = orderService;
         this.orderMapper = orderMapper;
         this.cartService = cartService;
@@ -63,9 +63,9 @@ public class OrderController {
     @GetMapping("/by-email/{email}")
     @ApiImplicitParam(name = "token", value = "token", paramType = "query")
     public List<OrderResponseDto> getUserByEmail(@PathVariable String email,
-                                                 @ApiIgnore Authentication authentication)
+                                                  @ApiIgnore Authentication authentication)
             throws UserNotFoundException {
-        if (authentication.getName().equals(email)) {
+        if (authentication.getName().equals(email)){
             throw new HttpBadRequestException("Admin doesn't have orders.");
         }
         User user = userService.getByEmail(email)
